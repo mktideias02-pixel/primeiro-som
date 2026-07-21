@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aprenda guitarra ou baixo do zero com uma plataforma prática, visual e direta para iniciantes.">
+  <title>Primeiro Som — Guitarra e Baixo do Zero</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=Inter+Tight:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-2: #0c0c0d;
+      --bg-3: #131315;
+      --card: #101012;
+      --card-2: #17171a;
+      --ink: #f4f4f1;
+      --ink-soft: #d9d9d4;
+      --muted: #9a9aa1;
+      --line: rgba(255,255,255,.10);
+      --line-2: rgba(255,255,255,.06);
+      --red: #d32020;
+      --red-2: #f03b3b;
+      --red-3: #851515;
+      --green: #39d98a;
+      --yellow: #f4c844;
+      --radius: 18px;
+      --shadow: 0 16px 40px rgba(0,0,0,.34);
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px),
+        radial-gradient(circle at 15% 10%, rgba(211,32,32,.15), transparent 24%),
+        radial-gradient(circle at 85% 18%, rgba(211,32,32,.08), transparent 18%),
+        var(--bg);
+      background-size: 26px 26px, 26px 26px, auto, auto, auto;
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+      padding-bottom: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .container {
+      width: min(calc(100% - 28px), var(--max));
+      margin: 0 auto;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--red-2);
+      font: 900 11px/1 "Inter", sans-serif;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .grain::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .08;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: screen;
+    }
+
+    .top-status {
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      background: linear-gradient(90deg, #120909, #1a0909 40%, #120909);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .top-status .container {
+      min-height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+      font: 900 10px/1 "Inter", sans-serif;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red-2);
+      box-shadow: 0 0 0 0 rgba(240,59,59,.45);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(240,59,59,.45); }
+      70% { box-shadow: 0 0 0 8px rgba(240,59,59,0); }
+      100% { box-shadow: 0 0 0 0 rgba(240,59,59,0); }
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 70;
+      background: rgba(7,7,8,.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: #fff;
+      font: 900 18px/1 "Inter Tight", sans-serif;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--red), #730d0d);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      color: #c6c6c9;
+      font: 800 11px/1 "Inter", sans-serif;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .button {
+      min-height: 48px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      color: #fff;
+      background: linear-gradient(180deg, var(--red-2), var(--red));
+      box-shadow: 0 10px 22px rgba(211,32,32,.2);
+      font: 900 12px/1 "Inter", sans-serif;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .1s ease, box-shadow .15s ease, filter .15s ease, background .15s ease;
+    }
+
+    .button:hover {
+      filter: brightness(1.04);
+      box-shadow: 0 12px 28px rgba(211,32,32,.28);
+    }
+
+    .button:active { transform: scale(.98); }
+
+    .button.outline {
+      color: #fff;
+      background: transparent;
+      border-color: var(--line);
+      box-shadow: none;
+    }
+
+    .button.outline:hover { background: rgba(255,255,255,.04); }
+
+    .button.dark {
+      color: var(--red-2);
+      background: #080808;
+      border-color: rgba(255,255,255,.08);
+      box-shadow: none;
+    }
+
+    .hero {
+      padding: 34px 0 20px;
+    }
+
+    .strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 18px;
+      scrollbar-width: none;
+    }
+
+    .strip::-webkit-scrollbar { display: none; }
+
+    .chip {
+      flex: 0 0 auto;
+      min-height: 34px;
+      padding: 0 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+      color: #c9c9cd;
+      font: 800 10px/1 "Inter", sans-serif;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .chip.active {
+      color: #fff;
+      background: rgba(211,32,32,.18);
+      border-color: rgba(211,32,32,.38);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(360px, .9fr);
+      gap: 14px;
+    }
+
+    .hero-main,
+    .hero-side {
+      border-radius: 24px;
+      overflow: hidden;
+      min-height: 520px;
+      position: relative;
+    }
+
+    .hero-main {
+      padding: 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(180deg, rgba(211,32,32,.09), transparent 28%),
+        linear-gradient(145deg, #101012 0%, #060607 72%);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--red-2);
+      font: 900 11px/1 "Inter", sans-serif;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .hero-main h1 {
+      margin: 18px 0 16px;
+      max-width: 740px;
+      font: 900 clamp(48px, 7vw, 92px)/.88 "Inter Tight", sans-serif;
+      letter-spacing: -.07em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .hero-main h1 span {
+      display: block;
+      color: var(--red-2);
+      font-style: italic;
+    }
+
+    .hero-main p {
+      max-width: 650px;
+      margin: 0;
+      color: rgba(255,255,255,.72);
+      font-size: clamp(14px, 1.7vw, 17px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .trust-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      margin-top: 20px;
+      color: rgba(255,255,255,.58);
+      font: 800 10px/1.3 "Inter", sans-serif;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .trust-line span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .hero-side {
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .setlist-ticket {
+      position: relative;
+      min-height: 100%;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #1b0f0f;
+      border-radius: 18px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, transparent 49.65%, rgba(60,0,0,.17) 50%, rgba(255,255,255,.16) 50.6%, transparent 51%),
+        linear-gradient(transparent 32.8%, rgba(60,0,0,.17) 33.3%, rgba(255,255,255,.15) 33.8%, transparent 34.1%),
+        linear-gradient(transparent 65.8%, rgba(60,0,0,.17) 66.3%, rgba(255,255,255,.15) 66.8%, transparent 67.1%),
+        linear-gradient(135deg, #f14b43 0 25%, #de2e28 25% 50%, #eb4037 50% 75%, #c81f1f 75%);
+      box-shadow: inset 0 0 34px rgba(70,0,0,.22);
+    }
+
+    .setlist-ticket::before {
+      content: "LIMITED DROP";
+      position: absolute;
+      top: 20px;
+      right: -44px;
+      width: 180px;
+      padding: 7px 0;
+      text-align: center;
+      color: #fff;
+      background: rgba(10,10,10,.86);
+      font: 900 10px/1 "Inter", sans-serif;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      transform: rotate(34deg);
+    }
+
+    .setlist-ticket::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .14;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    .ticket-content { position: relative; z-index: 1; }
+
+    .ticket-overline {
+      margin-bottom: 22px;
+      font: italic 800 12px/1 "Inter Tight", sans-serif;
+      transform: rotate(-1.2deg);
+    }
+
+    .setlist-ticket h2 {
+      margin: 0;
+      font: 900 clamp(42px, 5.8vw, 66px)/.84 "Inter Tight", sans-serif;
+      letter-spacing: -.07em;
+      text-transform: uppercase;
+    }
+
+    .price-block {
+      margin: 24px 0 18px;
+      transform: rotate(.35deg);
+    }
+
+    .price-label {
+      display: block;
+      margin-bottom: 4px;
+      font: 900 10px/1 "Inter", sans-serif;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .price {
+      font: 900 clamp(58px, 6.2vw, 82px)/.85 "Inter Tight", sans-serif;
+      letter-spacing: -.08em;
+    }
+
+    .price small {
+      font: 800 12px/1 "Inter", sans-serif;
+      letter-spacing: 0;
+    }
+
+    .credits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 16px;
+      margin: 18px 0 24px;
+    }
+
+    .credit {
+      padding-top: 8px;
+      border-top: 1px solid rgba(16,10,10,.34);
+    }
+
+    .credit span {
+      display: block;
+      font: 900 9px/1 "Inter", sans-serif;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .credit strong {
+      display: block;
+      margin-top: 5px;
+      font: italic 800 13px/1.15 "Inter Tight", sans-serif;
+    }
+
+    .ticket-note {
+      margin-bottom: 14px;
+      font: 800 10px/1.35 "Inter", sans-serif;
+      letter-spacing: .045em;
+      text-transform: uppercase;
+    }
+
+    .setlist-ticket .button {
+      width: 100%;
+      color: var(--red-2);
+      background: #080808;
+      border-color: rgba(255,255,255,.12);
+      box-shadow: none;
+    }
+
+    .setlist-ticket .button:hover { background: #151515; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .stat-card {
+      min-height: 108px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      box-shadow: 0 4px 16px rgba(0,0,0,.18);
+    }
+
+    .stat-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 17px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--red-2);
+      background: rgba(211,32,32,.12);
+      border: 1px solid rgba(211,32,32,.18);
+    }
+
+    .stat-card strong {
+      display: block;
+      color: #fff;
+      font: 800 13px/1.1 "Inter Tight", sans-serif;
+    }
+
+    .stat-card span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .section {
+      padding: 58px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, .54fr);
+      align-items: end;
+      gap: 28px;
+      margin-bottom: 26px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      color: #fff;
+      font: 900 clamp(34px, 5vw, 58px)/.94 "Inter Tight", sans-serif;
+      letter-spacing: -.06em;
+      text-transform: uppercase;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .control-card {
+      min-height: 154px;
+      padding: 17px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+      box-shadow: 0 8px 20px rgba(0,0,0,.18);
+      transition: transform .1s ease, border-color .15s ease;
+      cursor: default;
+    }
+
+    .control-card:active { transform: scale(.98); }
+
+    .control-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .control-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--red-2);
+      background: rgba(211,32,32,.10);
+      border: 1px solid rgba(211,32,32,.14);
+    }
+
+    .status-chip {
+      padding: 5px 7px;
+      border-radius: 999px;
+      color: var(--green);
+      background: rgba(57,217,138,.12);
+      font: 900 9px/1 "Inter", sans-serif;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .control-card h3 {
+      margin: 0;
+      color: #fff;
+      font: 800 14px/1.05 "Inter Tight", sans-serif;
+    }
+
+    .control-card p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .media-card {
+      color: #fff;
+      background: linear-gradient(135deg, #241615, #731717 65%, #b11919);
+      border-color: rgba(255,255,255,.06);
+    }
+
+    .media-card .control-icon {
+      color: #fff;
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.12);
+    }
+
+    .media-card h3,
+    .media-card p { color: #fff; }
+
+    .media-card p { opacity: .76; }
+
+    .visualizer {
+      display: flex;
+      align-items: end;
+      gap: 3px;
+      height: 18px;
+    }
+
+    .visualizer span {
+      width: 3px;
+      border-radius: 2px;
+      background: #fff;
+      animation: bounce 1s infinite ease-in-out;
+    }
+
+    .visualizer span:nth-child(1) { height: 8px; animation-delay: -.2s; }
+    .visualizer span:nth-child(2) { height: 16px; animation-delay: -.4s; }
+    .visualizer span:nth-child(3) { height: 11px; animation-delay: -.6s; }
+
+    @keyframes bounce {
+      0%,100% { transform: scaleY(.65); opacity: .65; }
+      50% { transform: scaleY(1.1); opacity: 1; }
+    }
+
+    .dark-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(145deg, #121214, #0a0a0b);
+      border-color: rgba(255,255,255,.08);
+    }
+
+    .dark-card::after {
+      content: "";
+      position: absolute;
+      width: 94px;
+      height: 94px;
+      right: -14px;
+      top: 6px;
+      opacity: .06;
+      background: currentColor;
+      color: #fff;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 7h3l2-2h6l2 2h3v12H4z'/%3E%3Ccircle fill='white' cx='12' cy='13' r='4'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+
+    .red-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ef4444;
+      animation: pulse 1.8s infinite;
+    }
+
+    .activity {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 12px;
+    }
+
+    .activity-log,
+    .platform-preview {
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-title {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel-title strong {
+      color: #fff;
+      font: 800 13px/1 "Inter Tight", sans-serif;
+      text-transform: uppercase;
+    }
+
+    .panel-title span {
+      color: var(--muted);
+      font: 800 9px/1 "Inter", sans-serif;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .log-row {
+      min-height: 72px;
+      padding: 12px 16px;
+      display: grid;
+      grid-template-columns: 48px 1px 1fr 34px;
+      align-items: center;
+      gap: 13px;
+      border-bottom: 1px solid var(--line-2);
+    }
+
+    .log-row:last-child { border-bottom: 0; }
+
+    .log-time {
+      color: #fff;
+      font: 800 10px/1.25 "Inter", sans-serif;
+      text-transform: uppercase;
+    }
+
+    .log-divider { align-self: stretch; background: var(--line); }
+
+    .log-content strong {
+      display: block;
+      color: #fff;
+      font: 800 12px/1.1 "Inter Tight", sans-serif;
+    }
+
+    .log-content span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .log-icon {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      color: var(--green);
+      background: rgba(57,217,138,.10);
+    }
+
+    .platform-body { padding: 20px; }
+
+    .platform-window {
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.07);
+      background: #080808;
+    }
+
+    .window-top {
+      min-height: 34px;
+      padding: 0 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: rgba(255,255,255,.55);
+      background: #121214;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font: 800 9px/1 "Inter", sans-serif;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .window-dots i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #5f6368;
+    }
+
+    .tab-area {
+      padding: 18px;
+      color: #fca5a5;
+      font: 700 12px/1.55 "Courier New", monospace;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .answer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 0 18px 18px;
+    }
+
+    .answer-grid span {
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 10px;
+      color: #c9c9ce;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 800;
+      background: rgba(255,255,255,.03);
+    }
+
+    .answer-grid .correct {
+      color: #082114;
+      background: #86efac;
+      border-color: #86efac;
+    }
+
+    .offer-section {
+      padding: 54px 0;
+    }
+
+    .offer-band {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 28px;
+      padding: 30px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 20px;
+      background:
+        linear-gradient(90deg, rgba(211,32,32,.14), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      box-shadow: var(--shadow);
+    }
+
+    .offer-band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .08;
+      background-image: repeating-linear-gradient(135deg, transparent 0 10px, rgba(255,255,255,.05) 10px 12px);
+    }
+
+    .offer-band h2 {
+      margin: 0;
+      color: #fff;
+      font: 900 clamp(32px, 5vw, 56px)/.92 "Inter Tight", sans-serif;
+      letter-spacing: -.06em;
+      text-transform: uppercase;
+    }
+
+    .offer-band p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .offer-buy {
+      min-width: 270px;
+      text-align: right;
+    }
+
+    .offer-buy .price-mini {
+      display: block;
+      margin-bottom: 12px;
+      color: #fff;
+      font: 900 38px/1 "Inter Tight", sans-serif;
+      letter-spacing: -.05em;
+    }
+
+    .offer-buy .button { width: 100%; }
+
+    .faq {
+      max-width: 860px;
+      margin: 0 auto;
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-item { border-bottom: 1px solid var(--line); }
+
+    .faq-question {
+      width: 100%;
+      padding: 18px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      color: #fff;
+      background: transparent;
+      border: 0;
+      text-align: left;
+      font: 800 13px/1.2 "Inter Tight", sans-serif;
+      cursor: pointer;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .25s ease;
+    }
+
+    .faq-answer p {
+      margin: 0;
+      padding: 0 42px 18px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .faq-item.open .faq-answer { max-height: 180px; }
+    .faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+    .faq-toggle {
+      color: var(--red-2);
+      font-size: 22px;
+      transition: transform .18s ease;
+    }
+
+    footer {
+      padding: 28px 0 88px;
+      color: #9ca3af;
+      background: #080809;
+      font-size: 10px;
+      font-weight: 600;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .footer-row strong {
+      color: #fff;
+      font: 900 12px/1 "Inter Tight", sans-serif;
+      text-transform: uppercase;
+    }
+
+    .mobile-nav { display: none; }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+      .hero-grid,
+      .activity { grid-template-columns: 1fr; }
+      .hero-main,
+      .hero-side { min-height: auto; }
+      .control-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-head { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      body { padding-bottom: 66px; }
+      .nav { grid-template-columns: 1fr auto; }
+      .nav > .button { display: none; }
+      .hero { padding-top: 18px; }
+      .hero-main { padding: 24px; min-height: 460px; }
+      .hero-main h1 { font-size: clamp(45px, 15vw, 66px); }
+      .hero-actions .button { width: 100%; }
+      .hero-side { padding: 10px; }
+      .setlist-ticket { padding: 24px; }
+      .stat-grid,
+      .control-grid { grid-template-columns: repeat(2, 1fr); }
+      .control-card { min-height: 138px; }
+      .offer-band { grid-template-columns: 1fr; }
+      .offer-buy { min-width: 0; text-align: left; }
+      .footer-row { display: block; }
+      .footer-row > div + div { margin-top: 14px; }
+
+      .mobile-nav {
+        position: fixed;
+        z-index: 95;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        min-height: 62px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        background: rgba(10,10,10,.96);
+        border-top: 1px solid var(--line);
+        backdrop-filter: blur(14px);
+      }
+
+      .mobile-nav a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        color: #9ca3af;
+        font: 800 9px/1 "Inter", sans-serif;
+      }
+
+      .mobile-nav a.active { color: #fff; }
+      .mobile-nav .icon { width: 19px; height: 19px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-status grain">
+    <div class="container">
+      <span class="live-dot"></span>
+      Oferta no ar: curso completo por R$ 10,00
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Primeiro Som">
+        <span class="brand-mark">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 4v16M7 9h9M16 4v16M4 6h6M13 18h6"/>
+          </svg>
+        </span>
+        Primeiro Som
+      </a>
+
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#metodo">Método</a>
+        <a href="#plataforma">Plataforma</a>
+        <a href="#conteudo">Conteúdo</a>
+        <a href="#duvidas">Dúvidas</a>
+      </nav>
+
+      <a class="button checkout-link" href="#">Comprar por R$ 10,00</a>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="container">
+        <div class="strip" aria-label="Destaques do curso">
+          <span class="chip active">Do zero ao primeiro riff</span>
+          <span class="chip">Guitarra</span>
+          <span class="chip">Baixo</span>
+          <span class="chip">Aulas diretas</span>
+          <span class="chip">Exercícios práticos</span>
+        </div>
+
+        <div class="hero-grid">
+          <article class="hero-main grain">
+            <div>
+              <div class="hero-kicker">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M4 18V6h16v12zM8 10h8M8 14h5"/></svg>
+                Curso para iniciantes
+              </div>
+
+              <h1>
+                Aprenda do zero.
+                <span>Toque com atitude.</span>
+              </h1>
+
+              <p>
+                Um caminho direto para quem quer começar na guitarra ou no baixo sem enrolação, com aulas objetivas, desafios visuais e prática desde o início.
+              </p>
+            </div>
+
+            <div>
+              <div class="hero-actions">
+                <a class="button checkout-link" href="#">
+                  Garantir acesso
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+                </a>
+                <a class="button outline" href="#plataforma">Ver a plataforma</a>
+              </div>
+
+              <div class="trust-line">
+                <span>
+                  <svg class="icon" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+                  Checkout seguro
+                </span>
+                <span>
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.2 2.8 8 7 10 4.2-2 7-5.8 7-10V6z"/><path d="m9 12 2 2 4-5"/></svg>
+                  Garantia de 7 dias
+                </span>
+                <span>
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                  Acesso imediato
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <aside class="hero-side">
+            <div class="setlist-ticket">
+              <div class="ticket-content">
+                <div class="ticket-overline">(seu primeiro som começa aqui)</div>
+
+                <h2>Entre na trilha e comece hoje.</h2>
+
+                <div class="price-block">
+                  <span class="price-label">Pagamento único</span>
+                  <div class="price" id="price">R$ 10,00</div>
+                </div>
+
+                <div class="credits-grid">
+                  <div class="credit">
+                    <span>Nível</span>
+                    <strong>Absoluto zero</strong>
+                  </div>
+                  <div class="credit">
+                    <span>Instrumentos</span>
+                    <strong>Guitarra + baixo</strong>
+                  </div>
+                  <div class="credit">
+                    <span>Formato</span>
+                    <strong>Aulas + prática</strong>
+                  </div>
+                  <div class="credit">
+                    <span>Acesso</span>
+                    <strong>Online imediato</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ticket-content">
+                <div class="ticket-note">Curso completo, exercícios interativos, revisões visuais e missões.</div>
+                <a class="button checkout-link" href="#">Comprar agora</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="stat-grid">
+          <article class="stat-card">
+            <span class="stat-icon">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M4 19V5h16v14zM8 15l3-3 2 2 3-4"/></svg>
+            </span>
+            <strong>Aprendizado visual</strong>
+            <span>Diagramas, mapas e exemplos no braço.</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-icon">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M5 4h14v16H5zM8 8h8M8 12h5M8 16h7"/></svg>
+            </span>
+            <strong>Prática guiada</strong>
+            <span>Exercícios curtos e objetivos.</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-icon">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M6 6l12 12M18 6 6 18"/></svg>
+            </span>
+            <strong>Feito para iniciantes</strong>
+            <span>Sem necessidade de experiência prévia.</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-icon">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.2 2.8 8 7 10 4.2-2 7-5.8 7-10V6z"/></svg>
+            </span>
+            <strong>Compra sem risco</strong>
+            <span>Garantia de 7 dias para testar.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="metodo">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Método Primeiro Som</p>
+            <h2>Saia do caos e siga uma linha clara para tocar.</h2>
+          </div>
+          <p>
+            Em vez de vídeos aleatórios, você recebe uma estrutura simples: entender, praticar e tocar, sempre com foco no que realmente importa para começar.
+          </p>
+        </div>
+
+        <div class="control-grid">
+          <article class="control-card">
+            <div class="control-top">
+              <span class="control-icon">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg>
+              </span>
+              <span class="status-chip">Etapa 01</span>
+            </div>
+            <div>
+              <h3>Entenda o instrumento</h3>
+              <p>Partes, postura, afinação e primeiros movimentos.</p>
+            </div>
+          </article>
+
+          <article class="control-card media-card">
+            <div class="control-top">
+              <span class="control-icon">
+                <svg class="icon" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg>
+              </span>
+              <span class="visualizer"><span></span><span></span><span></span></span>
+            </div>
+            <div>
+              <h3>Aulas curtas</h3>
+              <p>Conteúdo direto para assistir e aplicar na hora.</p>
+            </div>
+          </article>
+
+          <article class="control-card">
+            <div class="control-top">
+              <span class="control-icon">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M4 18V6h16v12zM8 10h8M8 14h5"/></svg>
+              </span>
+              <span class="status-chip">Etapa 02</span>
+            </div>
+            <div>
+              <h3>Pratique sem travar</h3>
+              <p>Notas, casas, TAB, acordes e ritmo passo a passo.</p>
+            </div>
+          </article>
+
+          <article class="control-card dark-card">
+            <div class="control-top">
+              <span class="red-dot"></span>
+              <span style="color:rgba(255,255,255,.54);font:800 9px/1 Inter;text-transform:uppercase">Missão ativa</span>
+            </div>
+            <div>
+              <h3>Toque de verdade</h3>
+              <p>Desafios e aplicações reais para fixar o conteúdo.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="plataforma">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Plataforma</p>
+            <h2>Mais do que aula: prática, revisão e progresso.</h2>
+          </div>
+          <p>
+            O aluno acompanha uma trilha com atividades, correções e pequenos desafios que ajudam a manter o ritmo de estudo.
+          </p>
+        </div>
+
+        <div class="activity">
+          <div class="activity-log">
+            <div class="panel-title">
+              <strong>Trilha inicial</strong>
+              <span>Progresso do aluno</span>
+            </div>
+
+            <div class="log-row">
+              <div class="log-time">Aula<br>01</div>
+              <div class="log-divider"></div>
+              <div class="log-content">
+                <strong>Conhecendo o instrumento</strong>
+                <span>Partes, postura e cuidados básicos.</span>
+              </div>
+              <div class="log-icon">
+                <svg class="icon" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+              </div>
+            </div>
+
+            <div class="log-row">
+              <div class="log-time">Aula<br>02</div>
+              <div class="log-divider"></div>
+              <div class="log-content">
+                <strong>Primeiras notas no braço</strong>
+                <span>Casas, cordas e localização visual.</span>
+              </div>
+              <div class="log-icon">
+                <svg class="icon" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+              </div>
+            </div>
+
+            <div class="log-row">
+              <div class="log-time">Missão<br>01</div>
+              <div class="log-divider"></div>
+              <div class="log-content">
+                <strong>Encontre todas as notas Lá</strong>
+                <span>Exercício de fixação no braço.</span>
+              </div>
+              <div class="log-icon" style="color:var(--yellow);background:rgba(244,200,68,.14)">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.2 2.8 8 7 10 4.2-2 7-5.8 7-10V6z"/></svg>
+              </div>
+            </div>
+
+            <div class="log-row">
+              <div class="log-time">Quiz<br>01</div>
+              <div class="log-divider"></div>
+              <div class="log-content">
+                <strong>Leitura básica de TAB</strong>
+                <span>Teste rápido antes de avançar.</span>
+              </div>
+              <div class="log-icon" style="color:#7dd3fc;background:rgba(125,211,252,.12)">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M12 6v6l4 2M4 4h16v16H4z"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="platform-preview">
+            <div class="panel-title">
+              <strong>Exercício interativo</strong>
+              <span>Exemplo visual</span>
+            </div>
+
+            <div class="platform-body">
+              <div class="platform-window">
+                <div class="window-top">
+                  <span>missao_leitura.tab</span>
+                  <span class="window-dots"><i></i><i></i><i></i></span>
+                </div>
+
+                <div class="tab-area">e|----------------|
+B|----------------|
+G|----------------|
+D|----------------|
+A|------3---------|
+E|----------------|</div>
+
+                <div class="answer-grid">
+                  <span>Lá</span>
+                  <span class="correct">Dó</span>
+                  <span>Ré</span>
+                </div>
+              </div>
+
+              <p style="margin:16px 0 0;color:var(--muted);font-size:11px">
+                O aluno identifica a nota, vê a resposta correta e continua a jornada sem perder o ritmo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="conteudo">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Conteúdo</p>
+            <h2>O essencial para começar bem.</h2>
+          </div>
+          <p>
+            A proposta é simples: oferecer o necessário para o aluno começar com segurança, sem excesso de informação na página de vendas.
+          </p>
+        </div>
+
+        <div class="control-grid">
+          <article class="control-card">
+            <div class="control-top">
+              <span class="control-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M7 4v16M7 9h9M16 4v16"/></svg></span>
+              <span class="status-chip">Base</span>
+            </div>
+            <div><h3>Conhecendo o braço</h3><p>Notas, casas, cordas e oitavas.</p></div>
+          </article>
+
+          <article class="control-card">
+            <div class="control-top">
+              <span class="control-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M5 18V6h14v12M8 10h8M8 14h5"/></svg></span>
+              <span class="status-chip">Leitura</span>
+            </div>
+            <div><h3>TAB sem complicação</h3><p>Leia e toque sequências simples.</p></div>
+          </article>
+
+          <article class="control-card">
+            <div class="control-top">
+              <span class="control-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M4 12h16M8 6v12M16 6v12"/></svg></span>
+              <span class="status-chip">Prática</span>
+            </div>
+            <div><h3>Acordes e ritmo</h3><p>Formas básicas, trocas e levadas.</p></div>
+          </article>
+
+          <article class="control-card">
+            <div class="control-top">
+              <span class="control-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M6 18 18 6M9 6h9v9"/></svg></span>
+              <span class="status-chip">Evolução</span>
+            </div>
+            <div><h3>Primeiras músicas</h3><p>Use o que aprendeu em situações reais.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="offer-section">
+      <div class="container">
+        <div class="offer-band">
+          <div>
+            <p class="eyebrow">Oferta de lançamento</p>
+            <h2>Comece hoje por apenas R$ 10,00.</h2>
+            <p>Acesso liberado após a confirmação do pagamento. Garantia de 7 dias.</p>
+          </div>
+
+          <div class="offer-buy">
+            <span class="price-mini">R$ 10,00</span>
+            <a class="button checkout-link" href="#">Comprar e acessar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="duvidas">
+      <div class="container">
+        <div class="section-head" style="grid-template-columns:1fr;text-align:center">
+          <div>
+            <p class="eyebrow">Perguntas frequentes</p>
+            <h2>Dúvidas antes de começar?</h2>
+          </div>
+        </div>
+
+        <div class="faq">
+          <div class="faq-item">
+            <button class="faq-question">
+              Preciso saber alguma coisa antes de começar?
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Não. O curso foi pensado para quem está começando do absoluto zero.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              O curso serve para guitarra e baixo?
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Sim. Ele aborda fundamentos válidos para os dois instrumentos, com aplicações adequadas para cada um.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              O acesso é liberado imediatamente?
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>O acesso é enviado assim que o pagamento é confirmado pela plataforma de checkout.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              Como funciona a garantia?
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Você terá 7 dias para conhecer o produto e solicitar reembolso conforme as regras informadas no checkout.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>
+        <strong>Primeiro Som</strong><br>
+        Guitarra e baixo para iniciantes.
+      </div>
+      <div>
+        © <span id="year"></span> Todos os direitos reservados.<br>
+        Resultados dependem da prática e dedicação de cada aluno.
+      </div>
+    </div>
+  </footer>
+
+  <nav class="mobile-nav" aria-label="Navegação móvel">
+    <a class="active" href="#inicio">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v9H4z"/></svg>
+      Início
+    </a>
+    <a href="#metodo">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg>
+      Método
+    </a>
+    <a href="#plataforma">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M4 18V6h16v12zM8 10h8M8 14h5"/></svg>
+      Plataforma
+    </a>
+    <a class="checkout-link" href="#">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M4 7h16l-2 10H6zM8 7V5h8v2"/></svg>
+      Comprar
+    </a>
+  </nav>
+
+  <script>
+    const CONFIG = {
+      checkoutUrl: "https://SEU-LINK-DA-CAKTO-AQUI.com",
+      price: "R$ 10,00"
+    };
+
+    document.querySelectorAll(".checkout-link").forEach(link => {
+      link.href = CONFIG.checkoutUrl;
+      link.target = "_blank";
+      link.rel = "noopener";
+    });
+
+    document.getElementById("price").textContent = CONFIG.price;
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.querySelectorAll(".faq-question").forEach(button => {
+      button.addEventListener("click", () => {
+        const item = button.closest(".faq-item");
+        const wasOpen = item.classList.contains("open");
+
+        document.querySelectorAll(".faq-item").forEach(current => current.classList.remove("open"));
+        if (!wasOpen) item.classList.add("open");
+      });
+    });
+
+    document.querySelectorAll(".control-card, .chip").forEach(element => {
+      element.addEventListener("pointerdown", () => element.style.transform = "scale(.98)");
+      element.addEventListener("pointerup", () => element.style.transform = "");
+      element.addEventListener("pointerleave", () => element.style.transform = "");
+    });
+  </script>
+</body>
+</html>

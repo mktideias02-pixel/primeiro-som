@@ -601,15 +601,17 @@ E|--0---0---3-------------------------3---0--------|
   <script>
     const CONFIG = {
       pages: {
-        unificado: "#",
-        guitarra: "#",
-        baixo: "#"
+        unificado: "https://pay.cakto.com.br/3emrzhm_994579",
+        guitarra: "https://pay.cakto.com.br/3askne8_998601",
+        baixo: "https://pay.cakto.com.br/wh4qrvn_998612"
       }
     };
 
     document.querySelectorAll(".product-link").forEach(link => {
       const product = link.dataset.product;
       link.href = CONFIG.pages[product] || "#";
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
     });
 
     document.getElementById("year").textContent = new Date().getFullYear();

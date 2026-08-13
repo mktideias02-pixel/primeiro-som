@@ -438,11 +438,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1561517235697373');
+fbq('init', '1059405196463271');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1561517235697373&ev=PageView&noscript=1"
+src="https://www.facebook.com/tr?id=1059405196463271&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 </head>
@@ -658,15 +658,28 @@ E|--0---0---3-------------------------3---0--------|
   <script>
     const CONFIG = {
       pages: {
-        unificado: "#",
-        guitarra: "#",
-        baixo: "#"
+        unificado: "https://pay.cakto.com.br/3emrzhm_994579",
+        guitarra: "https://pay.cakto.com.br/3emrzhm_994579",
+        baixo: "https://pay.cakto.com.br/wh4qrvn_998612"
+      },
+      products: {
+        unificado: { name: "Primeiro Som — Guitarra e Baixo", value: 14.90 },
+        guitarra: { name: "Primeiro Som — Guitarra", value: 9.90 },
+        baixo: { name: "Primeiro Som — Baixo", value: 9.90 }
       }
     };
+
+    fbq('track', 'ViewContent', { content_name: 'Primeiro Som — Home', content_type: 'product_group', currency: 'BRL' });
 
     document.querySelectorAll(".product-link").forEach(link => {
       const product = link.dataset.product;
       link.href = CONFIG.pages[product] || "#";
+      link.addEventListener("click", () => {
+        const details = CONFIG.products[product];
+        if (details) {
+          fbq('track', 'InitiateCheckout', { content_name: details.name, value: details.value, currency: 'BRL' });
+        }
+      });
     });
 
     document.getElementById("year").textContent = new Date().getFullYear();

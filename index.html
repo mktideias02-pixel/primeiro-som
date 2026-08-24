@@ -662,7 +662,7 @@ E|--0---0---3-------------------------3---0--------|
     const CONFIG = {
       pages: {
         unificado: "https://pay.cakto.com.br/3emrzhm_994579",
-        guitarra: "https://pay.cakto.com.br/3emrzhm_994579",
+        guitarra: "https://pay.cakto.com.br/3askne8_998601",
         baixo: "https://pay.cakto.com.br/wh4qrvn_998612"
       },
       products: {
@@ -674,9 +674,18 @@ E|--0---0---3-------------------------3---0--------|
 
     fbq('track', 'ViewContent', { content_name: 'Primeiro Som — Home', content_type: 'product_group', currency: 'BRL' });
 
+    function checkoutWithTracking(url) {
+      const destination = new URL(url);
+      const source = new URLSearchParams(window.location.search);
+      source.forEach((value, key) => {
+        if (key.startsWith("utm_") || key === "fbclid") destination.searchParams.set(key, value);
+      });
+      return destination.toString();
+    }
+
     document.querySelectorAll(".product-link").forEach(link => {
       const product = link.dataset.product;
-      link.href = CONFIG.pages[product] || "#";
+      link.href = CONFIG.pages[product] ? checkoutWithTracking(CONFIG.pages[product]) : "#";
       link.addEventListener("click", () => {
         const details = CONFIG.products[product];
         if (details) {
@@ -689,3 +698,4 @@ E|--0---0---3-------------------------3---0--------|
   </script>
 </body>
 </html>
+
